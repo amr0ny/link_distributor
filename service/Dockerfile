@@ -5,8 +5,7 @@ COPY requirements.txt requirements.txt
 
 RUN chmod +x .
 
-RUN chmod +x .
-RUN  pip install --index-url=https://pypi.python.org/simple/ --trusted-host pypi.python.org --upgrade pip \
-     && pip install --index-url=https://pypi.python.org/simple/ --trusted-host pypi.python.org --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
 
 COPY . .

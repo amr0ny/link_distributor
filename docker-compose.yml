@@ -10,8 +10,7 @@ services:
       - ${UVICORN_PORT}
     volumes:
       - ./service/logs:/opt/link_dst/service/logs/:rw
-    networks:
-      - default
+    network: host
     entrypoint: >
       uvicorn app:app
       --host ${UVICORN_HOST}
@@ -28,8 +27,7 @@ services:
       - ./admin/static:/var/www/:rw
     expose:
       - "80"
-    networks:
-      - default
+    network: host
 
   nginx:
     image: nginx:latest
