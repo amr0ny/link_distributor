@@ -1,16 +1,20 @@
 version: "3"
 services:
   service:
-    build: service
+    build:
+      context: service
+      network: host
     env_file:
       - .env
     depends_on:
       - postgres
+    networks:
+      - default
     expose:
       - ${UVICORN_PORT}
     volumes:
       - ./service/logs:/opt/link_dst/service/logs/:rw
-    network: host
+    
     entrypoint: >
       uvicorn app:app
       --host ${UVICORN_HOST}
@@ -18,7 +22,9 @@ services:
       --workers ${UVICORN_WORKERS}
       --log-level ${UVICORN_LOG_LEVEL}
   admin:
-    build: admin
+    build:
+      context: admin
+      network: host
     env_file:
       - .env
     depends_on:
@@ -27,7 +33,8 @@ services:
       - ./admin/static:/var/www/:rw
     expose:
       - "80"
-    network: host
+    networks:
+      - default
 
   nginx:
     image: nginx:latest
