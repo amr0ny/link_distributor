@@ -12,13 +12,13 @@ services:
       - ./service/logs:/opt/link_dst/service/logs/:rw
     networks:
       - default
-      - host
     entrypoint: >
       uvicorn app:app
       --host ${UVICORN_HOST}
       --port ${UVICORN_PORT}
       --workers ${UVICORN_WORKERS}
       --log-level ${UVICORN_LOG_LEVEL}
+    network_mode: "host"
   admin:
     build: admin
     env_file:
@@ -31,7 +31,7 @@ services:
       - "80"
     networks:
       - default
-      - host
+    network_mode: "host"
 
   nginx:
     image: nginx:latest
