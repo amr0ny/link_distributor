@@ -15,8 +15,8 @@ COPY requirements.txt requirements.txt
 COPY uwsgi/uwsgi.ini uwsgi.ini
 
 RUN chmod +x .
-RUN  pip install --upgrade pip \
-     && pip install --no-cache-dir -r requirements.txt
+RUN  pip install --index-url=https://pypi.python.org/simple/ --trusted-host pypi.python.org --upgrade pip \
+     && pip install --index-url=https://pypi.python.org/simple/ --trusted-host pypi.python.org --no-cache-dir -r requirements.txt
 
 COPY . .
 
