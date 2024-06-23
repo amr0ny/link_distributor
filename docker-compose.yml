@@ -12,6 +12,7 @@ services:
       - ./service/logs:/opt/link_dst/service/logs/:rw
     networks:
       - default
+      - host
     entrypoint: >
       uvicorn app:app
       --host ${UVICORN_HOST}
@@ -30,6 +31,7 @@ services:
       - "80"
     networks:
       - default
+      - host
 
   nginx:
     image: nginx:latest
