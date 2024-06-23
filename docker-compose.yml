@@ -18,7 +18,6 @@ services:
       --port ${UVICORN_PORT}
       --workers ${UVICORN_WORKERS}
       --log-level ${UVICORN_LOG_LEVEL}
-    network_mode: "host"
   admin:
     build: admin
     env_file:
@@ -31,7 +30,6 @@ services:
       - "80"
     networks:
       - default
-    network_mode: "host"
 
   nginx:
     image: nginx:latest
